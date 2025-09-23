@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インフォグラフィック：引当在庫の戦略的活用法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #3357FF, #33A1FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8 max-w-6xl">
+
+        <header class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text tracking-tighter">「計画的」な在庫が、ビジネスを加速させる。</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600">引当在庫を理解し、機会損失ゼロの未来へ。</p>
+        </header>
+
+        <main class="space-y-24">
+            
+            <section>
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">引当在庫とは何か？</h2>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-8">通常の在庫とは別に、<span class="font-bold text-[#3357FF]">特定の計画的な目的</span>のために意図的に確保された在庫のことです。それは、未来の成功への戦略的な投資と言えます。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#33A1FF]">
+                            <p class="text-5xl mb-3">📈</p>
+                            <h3 class="text-xl font-bold">季節需要への対応</h3>
+                            <p class="text-gray-600 mt-2">セールや季節イベントなど、予測される需要増に備えます。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#82CCFF]">
+                            <p class="text-5xl mb-3">🏭</p>
+                            <h3 class="text-xl font-bold">生産計画の安定化</h3>
+                            <p class="text-gray-600 mt-2">工場のメンテナンスなど、計画的な生産停止期間を補います。</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#B4E0FF]">
+                            <p class="text-5xl mb-3">🎯</p>
+                            <h3 class="text-xl font-bold">特定販売への備え</h3>
+                            <p class="text-gray-600 mt-2">大口顧客からの受注や、将来のプロジェクトのために確保します。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900">引当在庫 vs. 安全在庫</h2>
+                    <p class="text-gray-600 mt-2">どちらも重要な在庫ですが、その目的は根本的に異なります。この違いを理解することが、適切な在庫管理の第一歩です。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-[#D9F0FF] p-8 rounded-xl text-center">
+                        <p class="text-6xl mb-4">🎯</p>
+                        <h3 class="text-2xl font-bold text-[#3357FF]">引当在庫 (計画)</h3>
+                        <p class="mt-4 text-lg">予測可能な<span class="font-bold">「未来のイベント」</span>に備えるための、意図的な在庫。</p>
+                        <p class="mt-2 text-gray-700">例：クリスマス商戦、大型契約</p>
+                    </div>
+                    <div class="bg-gray-200 p-8 rounded-xl text-center">
+                        <p class="text-6xl mb-4">🛡️</p>
+                        <h3 class="text-2xl font-bold text-gray-800">安全在庫 (不測)</h3>
+                        <p class="mt-4 text-lg">予測不可能な<span class="font-bold">「もしもの事態」</span>に備えるための、最低限の保険。</p>
+                        <p class="mt-2 text-gray-700">例：急な需要増、納期遅延</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">引当在庫がもたらす4つの重要な役割</h2>
+                    <p class="text-gray-600 mt-2 max-w-3xl mx-auto">引当在庫を戦略的に活用することで、ビジネスの安定性が増し、成長機会を確実に捉えることができます。</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <p class="text-5xl mb-3">🌊</p>
+                        <h3 class="text-xl font-bold">需要変動の吸収</h3>
+                        <p class="text-gray-600 mt-2">予測される需要の波に乗りこなし、欠品を防ぎます。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <p class="text-5xl mb-3">⚙️</p>
+                        <h3 class="text-xl font-bold">生産の安定化</h3>
+                        <p class="text-gray-600 mt-2">原材料を確保し、生産ラインをスムーズに稼働させます。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <p class="text-5xl mb-3">🤝</p>
+                        <h3 class="text-xl font-bold">機会損失の防止</h3>
+                        <p class="text-gray-600 mt-2">大口案件を逃さず、ビジネスチャンスを最大化します。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <p class="text-5xl mb-3">😊</p>
+                        <h3 class="text-xl font-bold">顧客満足度の向上</h3>
+                        <p class="text-gray-600 mt-2">約束した納期を守り、顧客からの信頼を勝ち取ります。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                 <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">成功の鍵は「バランス」</h2>
+                        <p class="mb-6 text-gray-700 leading-relaxed">引当在庫は強力な武器ですが、過剰になれば保管コストを圧迫する諸刃の剣です。データに基づいた効果的な管理が、その価値を最大限に引き出します。</p>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-start"><span class="text-[#3357FF] font-bold text-2xl mr-3">1.</span><div><strong class="font-bold text-gray-800">正確な需要予測：</strong>過去のデータから未来を読み解く。</div></li>
+                            <li class="flex items-start"><span class="text-[#3357FF] font-bold text-2xl mr-3">2.</span><div><strong class="font-bold text-gray-800">最適なレベル設定：</strong>過不足のない在庫量を維持する。</div></li>
+                            <li class="flex items-start"><span class="text-[#3357FF] font-bold text-2xl mr-3">3.</span><div><strong class="font-bold text-gray-800">定期的な見直し：</strong>市場の変化に柔軟に対応する。</div></li>
+                            <li class="flex items-start"><span class="text-[#3357FF] font-bold text-2xl mr-3">4.</span><div><strong class="font-bold text-gray-800">システムの活用：</strong>リアルタイムで在庫を可視化する。</div></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="managementRadarChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 mt-2">戦略的在庫管理の成熟度モデル</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-24 pt-8 border-t border-gray-300">
+            <p class="text-gray-600 text-lg">引当在庫を制する者は、ビジネスを制する。</p>
+            <p class="text-gray-500 mt-2">データに基づいた計画で、安定した成長を実現しましょう。</p>
+        </footer>
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const palette = {
+            primary: '#3357FF',
+            secondary: '#33A1FF',
+            accent1: '#82CCFF',
+            accent2: '#B4E0FF',
+            light: '#D9F0FF'
+        };
+
+        const managementRadarCtx = document.getElementById('managementRadarChart').getContext('2d');
+        new Chart(managementRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['需要予測', 'レベル設定', '定期的見直し', 'システム活用'],
+                datasets: [
+                {
+                    label: '成熟した企業',
+                    data: [9, 8.5, 8, 9.5],
+                    fill: true,
+                    backgroundColor: 'rgba(51, 87, 255, 0.2)',
+                    borderColor: palette.primary,
+                    pointBackgroundColor: palette.primary,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.primary
+                },
+                {
+                    label: '発展途上の企業',
+                    data: [5, 4, 3, 4.5],
+                    fill: true,
+                    backgroundColor: 'rgba(130, 204, 255, 0.2)',
+                    borderColor: palette.accent1,
+                    pointBackgroundColor: palette.accent1,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.accent1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: { font: { size: 14 } },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: {
+                            backdropColor: 'transparent',
+                            stepSize: 2
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
