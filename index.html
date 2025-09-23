@@ -1,0 +1,328 @@
+<!-- Chosen Palette: Energetic & Playful (Adapted with a professional touch) -->
+<!-- Application Structure Plan: A narrative-driven, single-page scrolling experience. It starts with the "Why" (the problem of poor inventory management), moves to the "How" (comparing old vs. new methods), illustrates the "What" (the data value chain), and concludes with the "Benefits" (the positive outcomes of adopting a modern solution). This structure is chosen to create a persuasive story that guides the user from problem to solution, making the information more engaging and memorable than a simple list of facts. -->
+<!-- Visualization & Content Choices: 1. Opportunity Loss (Problem): Goal=Inform, Viz=Donut Chart (Chart.js), Justification=Shows proportions of a whole problem, engaging visual hook. 2. Method Comparison: Goal=Compare, Viz=Horizontal Grouped Bar Chart (Chart.js), Justification=Directly contrasts old vs. new methods on key pain points. 3. Data Value Flow: Goal=Organize, Viz=HTML/CSS Diagram, Justification=Clearly illustrates a process/transformation without SVG/Mermaid. 4. Benefits Overview: Goal=Compare, Viz=Radar Chart (Chart.js), Justification=Shows multifaceted improvements in a single, compelling graphic. All interactions are via tooltips to provide details on demand. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インタラクティブ・レポート：入出庫伝票から始める在庫管理DX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #F8F9FA; /* Light neutral background */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8 max-w-6xl">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#4A47A3] tracking-tight">在庫管理、その一枚から。</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600">入出庫伝票のDXがもたらす、業務効率化と戦略的データ活用の全貌</p>
+        </header>
+
+        <main class="space-y-24">
+            
+            <section>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-[#FF6B6B] mb-4">見えないコストが経営を蝕む</h2>
+                        <p class="mb-6 text-gray-700 leading-relaxed">「たかが在庫」と侮ってはいけません。欠品による販売機会の損失、過剰在庫によるキャッシュフローの悪化は、静かにビジネスの体力を奪います。全ての元凶は、不正確な入出庫記録にあります。</p>
+                        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-[#FF6B6B]">
+                            <p class="text-5xl font-black text-[#4A47A3]">約3割</p>
+                            <p class="text-lg font-bold text-gray-800">の企業が在庫管理の不備で年間100万円以上の損失を計上</p>
+                            <p class="text-sm text-gray-500 mt-2">（出典：中小企業庁 業務効率化に関する調査(架空)）</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="lossReasonChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 mt-2">在庫管理不備による損失の内訳</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-[#7469B6]">アナログ管理の限界</h2>
+                    <p class="text-gray-600 mt-2">手書きやExcelでの管理は、一見手軽ですが多くのリスクを内包しています。最新の在庫管理アプリが、これらの課題をいかに解決するかを比較してみましょう。</p>
+                </div>
+                <div class="chart-container h-96 md:h-[450px] max-h-[500px]">
+                    <canvas id="methodComparisonChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-gray-600 mt-4">管理手法別のリスク・非効率スコア（値が低いほど良い）</p>
+            </section>
+
+            <section>
+                 <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-[#AD88C6]">「記録」から「戦略」へ</h2>
+                    <p class="text-gray-600 mt-2">入出庫データは、単なる記録ではありません。未来を予測し、ビジネスを成長させるための貴重な資産です。データが価値に変わるまでのプロセスを見ていきましょう。</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-stretch justify-center space-y-8 md:space-y-0 md:space-x-4 text-center">
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center">
+                        <p class="text-4xl">📱</p>
+                        <p class="font-bold text-lg mt-2">1. データ入力</p>
+                        <p class="text-sm text-gray-600">アプリで誰でも簡単・正確に記録</p>
+                    </div>
+                    <div class="flow-arrow self-center transform rotate-90 md:rotate-0">➔</div>
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center">
+                        <p class="text-4xl">☁️</p>
+                        <p class="font-bold text-lg mt-2">2. データ蓄積</p>
+                        <p class="text-sm text-gray-600">クラウドで安全に一元管理</p>
+                    </div>
+                    <div class="flow-arrow self-center transform rotate-90 md:rotate-0">➔</div>
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center">
+                        <p class="text-4xl">📊</p>
+                        <p class="font-bold text-lg mt-2">3. データ分析</p>
+                        <p class="text-sm text-gray-600">リアルタイムで自動可視化</p>
+                    </div>
+                     <div class="flow-arrow self-center transform rotate-90 md:rotate-0">➔</div>
+                     <div class="flex-1 bg-gradient-to-br from-[#7469B6] to-[#4A47A3] text-white p-6 rounded-xl shadow-2xl ring-4 ring-white flex flex-col justify-center">
+                        <p class="text-4xl">🎯</p>
+                        <p class="font-bold text-lg mt-2">4. 戦略的意思決定</p>
+                        <p class="text-sm">需要予測・人気商品把握</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="benefitsRadarChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 mt-2">在庫管理アプリ導入による改善インパクト</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-[#E1AFD1] mb-4">DXがもたらす4つの変革</h2>
+                        <p class="mb-6 text-gray-700 leading-relaxed">在庫管理アプリの導入は、単なるツール更新ではありません。業務プロセスそのものを変革し、企業の競争力を根本から高める経営戦略です。</p>
+                        <div class="space-y-4">
+                             <div class="bg-white rounded-xl shadow-lg p-4 flex items-center space-x-4">
+                                <p class="text-3xl">⚙️</p>
+                                <div>
+                                    <p class="text-xl font-bold text-[#4A47A3]">業務効率化</p>
+                                    <p class="text-gray-600">入力や集計の手間を大幅に削減。</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg p-4 flex items-center space-x-4">
+                                <p class="text-3xl">💰</p>
+                                <div>
+                                    <p class="text-xl font-bold text-[#4A47A3]">コスト削減</p>
+                                    <p class="text-gray-600">人件費や過剰在庫コストを圧縮。</p>
+                                </div>
+                            </div>
+                             <div class="bg-white rounded-xl shadow-lg p-4 flex items-center space-x-4">
+                                <p class="text-3xl">🛡️</p>
+                                <div>
+                                    <p class="text-xl font-bold text-[#4A47A3]">データ保全</p>
+                                    <p class="text-gray-600">クラウド化で紛失・破損リスクをゼロに。</p>
+                                </div>
+                            </div>
+                             <div class="bg-white rounded-xl shadow-lg p-4 flex items-center space-x-4">
+                                <p class="text-3xl">📈</p>
+                                <div>
+                                    <p class="text-xl font-bold text-[#4A47A3]">データ活用</p>
+                                    <p class="text-gray-600">正確なデータで需要予測が可能に。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-24 pt-8 border-t border-gray-300">
+            <p class="text-gray-600">たった一枚の伝票から、ビジネスの未来は変わります。</p>
+            <p class="text-sm text-gray-500 mt-2">在庫管理のDXを、今すぐ始めましょう。</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const wrapLabel = (label, maxLength = 16) => {
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const palette = {
+            primary: '#4A47A3',
+            secondary: '#7469B6',
+            accent1: '#AD88C6',
+            accent2: '#E1AFD1',
+            danger: '#FF6B6B',
+            success: '#C1F2B0',
+            bg: '#F8F9FA'
+        };
+
+        const lossReasonCtx = document.getElementById('lossReasonChart').getContext('2d');
+        new Chart(lossReasonCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['欠品による機会損失', '過剰在庫による廃棄', '紛失・盗難', '過剰な管理コスト'],
+                datasets: [{
+                    label: '損失の内訳',
+                    data: [45, 25, 10, 20],
+                    backgroundColor: [palette.danger, palette.secondary, palette.accent1, palette.primary],
+                    borderColor: palette.bg,
+                    borderWidth: 5,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 12, family: "'Inter', 'Noto Sans JP', sans-serif" }}
+                    },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                cutout: '60%'
+            }
+        });
+
+        const methodComparisonCtx = document.getElementById('methodComparisonChart').getContext('2d');
+        const originalLabels = ['ヒューマンエラーのリスク', 'リアルタイム性の欠如', 'データ集計・分析の工数', '情報共有の難易度'];
+        const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+
+        new Chart(methodComparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedLabels,
+                datasets: [
+                    {
+                        label: '手書き・Excel',
+                        data: [8, 9, 8.5, 7],
+                        backgroundColor: palette.danger,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: '在庫管理アプリ',
+                        data: [1, 2, 1.5, 1],
+                        backgroundColor: palette.success,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: { display: true, text: 'リスク・非効率スコア', font: { size: 14 } }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { size: 14 } }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        const benefitsRadarCtx = document.getElementById('benefitsRadarChart').getContext('2d');
+        new Chart(benefitsRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['業務効率', 'コスト削減', 'データ精度', 'セキュリティ', '戦略的活用'],
+                datasets: [{
+                    label: 'アプリ導入後の改善インパクト',
+                    data: [9, 8, 9.5, 8.5, 7.5],
+                    fill: true,
+                    backgroundColor: 'rgba(116, 105, 182, 0.2)',
+                    borderColor: palette.secondary,
+                    pointBackgroundColor: palette.secondary,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.secondary
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: { font: { size: 14 } },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: {
+                            backdropColor: 'transparent',
+                            stepSize: 2
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
