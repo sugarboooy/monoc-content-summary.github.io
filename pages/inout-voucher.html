@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>インフォグラフィック：入出庫伝票から始める在庫管理の最適化</title>
+    <title>インフォグラフィック：成長を加速させる在庫管理戦略</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,135 +12,137 @@
     <style>
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            background-color: #F0F4F8;
+            background-color: #F8F9FA;
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            height: 350px;
-            max-height: 450px;
+            height: 400px;
+            max-height: 500px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 400px;
+                height: 500px;
             }
         }
-        .flow-arrow {
+        .step-arrow {
             font-size: 2.5rem;
             line-height: 1;
-            color: #3357FF;
+            color: #33A1FF;
             font-weight: 900;
         }
-        .kpi-card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            text-align: center;
-            border-left: 5px solid;
+        .gradient-text {
+            background: linear-gradient(45deg, #3357FF, #33A1FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <div class="container mx-auto p-4 sm:p-8 max-w-6xl">
+    <div class="container mx-auto p-4 sm:p-8 max-w-7xl">
 
         <header class="text-center mb-20">
-            <h1 class="text-4xl md:text-6xl font-black text-[#3357FF] tracking-tighter">一枚の伝票から始まる、在庫管理革命。</h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-600">正確な入出庫記録が、ビジネスの未来をどう変えるか。</p>
+            <h1 class="text-4xl md:text-6xl font-black gradient-text tracking-tighter">在庫は、資産か、負債か。</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600">企業の競争力を左右する、在庫管理の全貌を解き明かす。</p>
         </header>
 
         <main class="space-y-24">
             
             <section>
                 <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">なぜ「正確な記録」が全ての基礎なのか？</h2>
-                    <p class="max-w-3xl mx-auto text-gray-600 mb-12">入出庫伝票は、単なる紙切れではありません。それは企業の資産（在庫）の動きを物語る、最も重要な一次情報です。この記録の正確性が、在庫管理全体の精度を決定づけます。</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">経営の根幹を揺るがす3つの課題</h2>
+                    <p class="max-w-3xl mx-auto text-gray-600 mb-12">在庫管理は単なる倉庫業務ではありません。企業のキャッシュフローから顧客満足度まで、あらゆる側面に影響を与える最重要経営課題です。適切な管理はこれらの課題を解決します。</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="kpi-card border-[#FF5733]">
-                        <p class="text-5xl mb-2">❓</p>
-                        <h3 class="text-xl font-bold mb-2">読み間違い</h3>
-                        <p class="text-gray-600">手書きによる曖昧な文字は、誤ったデータ入力の第一歩です。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-[#3357FF]">
+                        <p class="text-6xl mb-4">📉</p>
+                        <h3 class="text-2xl font-bold mb-2">過剰在庫の防止</h3>
+                        <p class="text-gray-600 leading-relaxed">保管コスト、廃棄ロス、キャッシュフローの悪化を防ぎ、経営資源を最適化します。</p>
                     </div>
-                    <div class="kpi-card border-[#A133FF]">
-                        <p class="text-5xl mb-2">🗑️</p>
-                        <h3 class="text-xl font-bold mb-2">汚損・破損</h3>
-                        <p class="text-gray-600">物理的なダメージにより、重要な情報が読み取れなくなる可能性があります。</p>
+                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-[#33A1FF]">
+                        <p class="text-6xl mb-4">📈</p>
+                        <h3 class="text-2xl font-bold mb-2">在庫不足の回避</h3>
+                        <p class="text-gray-600 leading-relaxed">販売機会の損失を防ぎ、顧客の信頼を維持することで、売上とブランド価値を向上させます。</p>
                     </div>
-                    <div class="kpi-card border-[#FF33A1]">
-                        <p class="text-5xl mb-2">💨</p>
-                        <h3 class="text-xl font-bold mb-2">紛失</h3>
-                        <p class="text-gray-600">記録そのものが失われ、在庫数に致命的なズレを生じさせます。</p>
+                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-[#82CCFF]">
+                        <p class="text-6xl mb-4">👁️</p>
+                        <h3 class="text-2xl font-bold mb-2">経営状況の可視化</h3>
+                        <p class="text-gray-600 leading-relaxed">正確な資産状況をリアルタイムで把握し、データに基づいた迅速な経営判断を可能にします。</p>
                     </div>
-                </div>
-                <div class="mt-8 text-center bg-white p-6 rounded-2xl shadow-lg">
-                    <p class="text-2xl font-bold text-[#3357FF]">記入の鉄則: 「その場で書く」</p>
-                    <p class="text-gray-700 mt-2">記憶は曖昧になります。作業が発生した直後に記録することが、ヒューマンエラーを防ぐ最も確実な方法です。</p>
                 </div>
             </section>
             
-            <section class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl">
+            <section class="bg-white p-6 sm:p-10 rounded-2xl shadow-2xl">
                 <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold text-gray-900">管理手法の進化：Excelからアプリへ</h2>
-                    <p class="text-gray-600 mt-2">ビジネスの成長と共に、管理ツールも進化させる必要があります。Excelと在庫管理アプリの能力を比較し、どちらが現代のビジネスに適しているかを見てみましょう。</p>
+                    <h2 class="text-3xl font-bold text-gray-900">管理手法の進化と特性</h2>
+                    <p class="text-gray-600 mt-2 max-w-3xl mx-auto">在庫管理ツールは、アナログからデジタル、そしてAIへと進化を続けています。それぞれの特性を理解し、自社に最適なツールを選ぶことが重要です。このチャートは、各手法の「導入コスト」と「運用効率」を比較しています。</p>
                 </div>
                 <div class="chart-container">
                     <canvas id="methodComparisonChart"></canvas>
                 </div>
-                <p class="text-center text-sm text-gray-600 mt-4">各項目でスコアが高いほど、その側面で優れていることを示します。</p>
             </section>
-
+            
             <section>
-                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900">データが価値に変わるプロセス</h2>
-                    <p class="text-gray-600 mt-2 max-w-3xl mx-auto">最新の在庫管理アプリは、単なる記録ツールではありません。入力されたデータを資産に変え、戦略的な意思決定を支援する強力なエンジンとなります。</p>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">企業の成長段階別・最適ソリューション</h2>
+                    <p class="text-gray-600 mt-2 max-w-3xl mx-auto">企業のフェーズによって、求められる在庫管理のレベルは異なります。自社の現在地を把握し、未来を見据えたツールを選択するためのロードマップです。</p>
                 </div>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 text-center">
-                    <div class="w-48">
-                        <p class="text-5xl">📄</p>
-                        <p class="font-bold text-lg mt-2">記録</p>
-                        <p class="text-sm text-gray-600">手動での正確な入力</p>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                     <div class="absolute top-1/2 left-0 w-full h-2 bg-[#B4E0FF] hidden md:block" style="transform: translateY(-50%); z-index: -1;"></div>
+                    <div class="relative bg-white p-8 rounded-2xl shadow-xl">
+                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#3357FF] text-white font-bold px-4 py-1 rounded-full">小規模</div>
+                        <p class="text-5xl my-4">🏢</p>
+                        <h3 class="text-xl font-bold">Excel & クラウドアプリ</h3>
+                        <p class="text-gray-600 mt-2">低コストで導入可能。まずは管理を習慣化し、データの蓄積を始める段階。</p>
                     </div>
-                    <div class="flow-arrow transform rotate-90 md:rotate-0">➔</div>
-                    <div class="w-48">
-                        <p class="text-5xl">⚙️</p>
-                        <p class="font-bold text-lg mt-2">自動化</p>
-                        <p class="text-sm text-gray-600">アプリによるデータ集計</p>
+                    <div class="relative bg-white p-8 rounded-2xl shadow-xl">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#33A1FF] text-white font-bold px-4 py-1 rounded-full">中規模</div>
+                        <p class="text-5xl my-4">🏬</p>
+                        <h3 class="text-xl font-bold">専用在庫管理システム</h3>
+                        <p class="text-gray-600 mt-2">事業拡大に伴い、リアルタイム性と複数人での管理が重要になる段階。</p>
                     </div>
-                    <div class="flow-arrow transform rotate-90 md:rotate-0">➔</div>
-                    <div class="w-48">
-                        <p class="text-5xl">📈</p>
-                        <p class="font-bold text-lg mt-2">分析</p>
-                        <p class="text-sm text-gray-600">需要変動や人気商品を把握</p>
-                    </div>
-                     <div class="flow-arrow transform rotate-90 md:rotate-0">➔</div>
-                     <div class="bg-gradient-to-br from-[#33FF57] to-[#3357FF] text-white p-6 rounded-xl shadow-2xl w-48 ring-4 ring-white">
-                        <p class="text-4xl">💡</p>
-                        <p class="font-bold text-lg mt-2">戦略</p>
-                        <p class="text-sm">データに基づく意思決定</p>
+                    <div class="relative bg-white p-8 rounded-2xl shadow-xl">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#82CCFF] text-white font-bold px-4 py-1 rounded-full">大規模</div>
+                        <p class="text-5xl my-4">🏭</p>
+                        <h3 class="text-xl font-bold">ERP & AI/IoT</h3>
+                        <p class="text-gray-600 mt-2">販売・会計データと連携し、需要予測の自動化など、高度な経営判断を行う段階。</p>
                     </div>
                 </div>
             </section>
             
-            <section>
-                 <div class="max-w-3xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">アプリ導入がもたらす3つの核心的メリット</h2>
-                    <p class="mb-10 text-gray-700 leading-relaxed">在庫管理アプリへの移行は、業務の質を根底から変革します。これにより、企業はより強固で効率的な運営基盤を築くことができます。</p>
-                    <ul class="space-y-6 text-lg text-left">
-                        <li class="flex items-start p-4 bg-white rounded-lg shadow-sm"><span class="text-[#33FF57] font-bold text-2xl mr-4">✓</span><div><strong class="font-bold text-gray-800">業務効率化：</strong>手作業による記録・集計時間を大幅に削減し、コア業務に集中できます。</div></li>
-                        <li class="flex items-start p-4 bg-white rounded-lg shadow-sm"><span class="text-[#33FF57] font-bold text-2xl mr-4">✓</span><div><strong class="font-bold text-gray-800">コスト削減：</strong>入力ミスや管理工数の削減が、人件費などの見えないコストを直接的に削減します。</div></li>
-                        <li class="flex items-start p-4 bg-white rounded-lg shadow-sm"><span class="text-[#33FF57] font-bold text-2xl mr-4">✓</span><div><strong class="font-bold text-gray-800">リスク低減：</strong>データはクラウドで安全に管理され、伝票の紛失や破損といった物理的リスクから解放されます。</div></li>
-                    </ul>
+            <section class="bg-gradient-to-br from-[#3357FF] to-[#33A1FF] text-white p-8 sm:p-12 rounded-2xl shadow-2xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">在庫管理を始めるための4ステップ</h2>
+                    <p class="mt-2 opacity-90 max-w-3xl mx-auto">どこから手をつければ良いかわからない、という悩みを解決します。このステップを踏むことで、無理なく確実な管理体制を構築できます。</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-around flex-wrap">
+                    <div class="text-center p-4">
+                        <p class="text-5xl">①</p><p class="text-2xl mt-2 font-bold">整理整頓</p><p class="opacity-80">物理的な環境を整備</p>
+                    </div>
+                    <div class="step-arrow transform rotate-90 md:rotate-0 my-4 md:my-0">➔</div>
+                    <div class="text-center p-4">
+                        <p class="text-5xl">②</p><p class="text-2xl mt-2 font-bold">手書き管理</p><p class="opacity-80">管理の基本を習慣化</p>
+                    </div>
+                    <div class="step-arrow transform rotate-90 md:rotate-0 my-4 md:my-0">➔</div>
+                    <div class="text-center p-4">
+                        <p class="text-5xl">③</p><p class="text-2xl mt-2 font-bold">Excel管理</p><p class="opacity-80">データをデジタル化</p>
+                    </div>
+                     <div class="step-arrow transform rotate-90 md:rotate-0 my-4 md:my-0">➔</div>
+                    <div class="text-center p-4">
+                        <p class="text-5xl">④</p><p class="text-2xl mt-2 font-bold">ツール導入</p><p class="opacity-80">業務をシステム化</p>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer class="text-center mt-24 pt-8 border-t border-gray-300">
-            <p class="text-gray-600">正確なデータは、より良いビジネス判断の礎です。在庫管理のDXで、競争力を高めましょう。</p>
+            <p class="text-gray-600 text-lg">最適な在庫管理は、企業の持続的な成長を支える礎です。</p>
+            <p class="text-gray-500 mt-2">自社のステージに合った一歩を、今日から踏み出しましょう。</p>
+            <p class="text-xs text-gray-400 mt-8">Generated by Gemini</p>
         </footer>
     </div>
 
@@ -155,9 +157,7 @@
         };
 
         const wrapLabel = (label, maxLength = 16) => {
-            if (label.length <= maxLength) {
-                return label;
-            }
+            if (label.length <= maxLength) return label;
             const words = label.split(' ');
             const lines = [];
             let currentLine = '';
@@ -169,44 +169,43 @@
                     currentLine = (currentLine + ' ' + word).trim();
                 }
             });
-            if (currentLine) {
-                lines.push(currentLine.trim());
-            }
+            if (currentLine) lines.push(currentLine.trim());
             return lines;
         };
         
         const palette = {
-            blue: '#3357FF',
-            green: '#33FF57',
-            red: '#FF5733',
-            pink: '#FF33A1',
-            purple: '#A133FF',
-            lightGray: '#F0F4F8',
-            darkGray: '#333333'
+            primary: '#3357FF',
+            accent1: '#33A1FF',
+            accent2: '#82CCFF',
+            light: '#B4E0FF',
+            lighter: '#D9F0FF'
         };
 
         const methodComparisonCtx = document.getElementById('methodComparisonChart').getContext('2d');
-        const originalLabels = ['データ分析・活用能力', 'リアルタイム性', '情報共有の容易さ', 'ヒューマンエラー耐性'];
-        const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+        const labels = ['手書き・Excel', 'バーコード・RFID', '在庫管理システム', wrapLabel('ERP・AI・IoT')];
 
         new Chart(methodComparisonCtx, {
             type: 'bar',
             data: {
-                labels: wrappedLabels,
+                labels: labels,
                 datasets: [
                     {
-                        label: '在庫管理アプリ',
-                        data: [9, 9, 8, 8],
-                        backgroundColor: palette.blue,
-                        borderRadius: 6,
-                        barPercentage: 0.6
+                        label: '導入コスト',
+                        data: [1, 4, 6, 9],
+                        backgroundColor: 'rgba(130, 204, 255, 0.7)',
+                        borderColor: palette.accent2,
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        barPercentage: 0.5
                     },
                     {
-                        label: 'Excelでの管理',
-                        data: [6, 3, 4, 5],
-                        backgroundColor: 'rgba(161, 51, 255, 0.5)',
-                        borderRadius: 6,
-                        barPercentage: 0.6
+                        label: '運用効率',
+                        data: [2, 6, 8, 10],
+                        backgroundColor: 'rgba(51, 161, 255, 0.7)',
+                        borderColor: palette.accent1,
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        barPercentage: 0.5
                     }
                 ]
             },
@@ -218,7 +217,8 @@
                     x: {
                         beginAtZero: true,
                         max: 10,
-                        title: { display: true, text: '能力スコア (10点満点)', font: { size: 14 } }
+                        title: { display: true, text: 'スコア (10点満点)', font: { size: 14 } },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
                     },
                     y: {
                         grid: { display: false },
@@ -226,13 +226,22 @@
                     }
                 },
                 plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    legend: { position: 'top', labels: { font: { size: 14 }} },
+                    tooltip: { 
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: '#fff',
+                        titleColor: '#333',
+                        bodyColor: '#666',
+                        borderColor: '#ddd',
+                        borderWidth: 1,
+                        padding: 10,
+                        cornerRadius: 8
+                    }
                 }
             }
         });
-
     </script>
 </body>
 </html>
+
 
