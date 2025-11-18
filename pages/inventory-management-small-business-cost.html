@@ -12,10 +12,12 @@
             padding: 0;
             background-color: #f0f7f7;
             color: #333;
-            /* 縦スクロールを禁止 */
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
+            /* 縦スクロールを禁止 -> 埋め込みのために変更 */
+            /* overflow: hidden; */
+            /* width: 100vw; -> 埋め込みのために変更 (100%へ) */
+            /* height: 100vh; -> 埋め込みのために変更 (100%へ) */
+            width: 100%;
+            height: 100%;
         }
 
         /* スライドコンテナ */
@@ -23,10 +25,14 @@
             display: flex;
             /* 横スクロールを有効化 */
             overflow-x: auto;
+            /* 縦スクロールを禁止 */
+            overflow-y: hidden;
             /* スクロールを1ページ単位でスナップさせる */
             scroll-snap-type: x mandatory;
-            width: 100vw;
-            height: 100vh;
+            /* width: 100vw; -> 埋め込みのために変更 (100%へ) */
+            /* height: 100vh; -> 埋め込みのために変更 (100%へ) */
+            width: 100%;
+            height: 100%;
             /* スクロールバーを隠す (ブラウザによる) */
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
@@ -37,9 +43,11 @@
 
         /* スライド（ページ）の共通スタイル */
         .slide {
-            /* 1スライドが_必ず_ viewport の100%幅になるように */
-            width: 100vw;
-            height: 100vh;
+            /* 1スライドが_必ず_ viewport の100%幅になるように -> 埋め込みのために変更 (100%へ) */
+            /* width: 100vw; */
+            /* height: 100vh; */
+            width: 100%;
+            height: 100%;
             flex-shrink: 0; /* 縮まないようにする */
             
             /* スナップの基点 */
@@ -52,6 +60,8 @@
             padding: 40px;
             box-sizing: border-box;
             text-align: center;
+            /* 埋め込み時にコンテンツが溢れた場合、スライド内をスクロールさせる */
+            overflow-y: auto;
             
             /* 視覚的な区切り (デバッグ用) */
             /* border-right: 1px solid #ccc; */
@@ -201,6 +211,14 @@
                 width: 40px;
                 height: 40px;
                 font-size: 20px;
+                /* スマホ埋め込み時、端すぎると押せない場合があるので調整 */
+                opacity: 0.8;
+            }
+            #prev-btn {
+                left: 10px;
+            }
+            #next-btn {
+                right: 10px;
             }
         }
     </style>
@@ -321,7 +339,7 @@
             clearTimeout(scrollTimer);
             // 150ms スクロールが止まったら実行
             scrollTimer = setTimeout(updateNavButtons, 150); 
-        });
+        }, { passive: true }); // スクロールパフォーマンス向上のため
 
         // ページ読み込み時とウィンドウサイズ変更時にもチェック
         window.addEventListener('load', updateNavButtons);
