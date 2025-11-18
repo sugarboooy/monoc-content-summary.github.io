@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小規模事業者の在庫管理スライド (横)</title>
+    <style>
+        /* 全体のスタイル */
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f7f7;
+            color: #333;
+            /* 縦スクロールを禁止 */
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* スライドコンテナ */
+        .slides-container {
+            display: flex;
+            /* 横スクロールを有効化 */
+            overflow-x: auto;
+            /* スクロールを1ページ単位でスナップさせる */
+            scroll-snap-type: x mandatory;
+            width: 100vw;
+            height: 100vh;
+            /* スクロールバーを隠す (ブラウザによる) */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .slides-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* スライド（ページ）の共通スタイル */
+        .slide {
+            /* 1スライドが_必ず_ viewport の100%幅になるように */
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0; /* 縮まないようにする */
+            
+            /* スナップの基点 */
+            scroll-snap-align: center;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            
+            /* 視覚的な区切り (デバッグ用) */
+            /* border-right: 1px solid #ccc; */
+        }
+
+        /* ページごとの背景と文字色 */
+        
+        /* P1: タイトルページ */
+        .slide-1 {
+            background-color: #008080; /* Teal */
+            color: #ffffff;
+        }
+        .slide-1 h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        .slide-1 p {
+            font-size: 1.4rem;
+        }
+
+        /* P2: 課題 */
+        .slide-2 {
+            background-color: #ffffff;
+            color: #005050; /* 濃いTeal */
+        }
+
+        /* P3: 解決策 */
+        .slide-3 {
+            background-color: #e0f2f1; /* 薄いTeal */
+        }
+
+        /* P4: 機能 */
+        .slide-4 {
+            background-color: #ffffff;
+        }
+
+        /* P5: 導入 */
+        .slide-5 {
+            background-color: #b2dfdb; /* やや薄いTeal */
+        }
+
+        /* P6: まとめ */
+        .slide-6 {
+            background-color: #004d40; /* 濃いTeal */
+            color: #ffffff;
+        }
+
+        /* 見出しスタイル */
+        h2 {
+            font-size: 2.2rem;
+            color: #00695c; /* Teal系 */
+            border-bottom: 3px solid #008080;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-top: 0; /* 上マージンをリセット */
+        }
+        
+        .slide-6 h2 {
+            color: #ffffff;
+            border-bottom-color: #ffffff;
+        }
+
+        /* コンテンツスタイル */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            max-width: 800px;
+            width: 90%;
+        }
+        li {
+            font-size: 1.2rem; /* 少し小さくして収まりを良くする */
+            background-color: #ffffff;
+            border-left: 5px solid #008080; /* Teal */
+            padding: 15px; /* 少し小さく */
+            margin-bottom: 15px;
+            text-align: left;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .slide-3 li, .slide-5 li {
+             background-color: #ffffff;
+        }
+        
+        .slide-5 li {
+             border-color: #00695c;
+             font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            width: 90%;
+            margin-top: 20px;
+        }
+        
+        .highlight {
+            color: #008080; /* Teal */
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        .slide-6 .highlight {
+             color: #b2dfdb; /* 薄いTeal */
+        }
+        
+        /* ナビゲーションボタン */
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 80, 80, 0.6); /* 半透明Teal */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .nav-btn:hover {
+            background-color: rgba(0, 60, 60, 0.8);
+        }
+        
+        #prev-btn {
+            left: 20px;
+        }
+        #next-btn {
+            right: 20px;
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            p, li { font-size: 1rem; }
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- スライドコンテナ -->
+    <main class="slides-container" id="slides-container">
+    
+        <!-- ページ1: タイトル -->
+        <section class="slide slide-1">
+            <h1>小規模事業者の在庫管理</h1>
+            <p>費用を抑えて成功させる5つの鍵</p>
+        </section>
+
+        <!-- ページ2: 課題 (Excel管理の限界) -->
+        <section class="slide slide-2">
+            <h2>なぜExcel管理は限界か？</h2>
+            <p>手入力やExcel管理は、事業の成長と共に「静かな機会損失」を生み出します。</p>
+            <ul>
+                <li><strong>販売機会の損失</strong><br>在庫があるのに「無い」と記録され、売るチャンスを逃す。</li>
+                <li><strong>キャッシュフローの悪化</strong><br>不安から過剰在庫を抱え、貴重な資金が固定化される。</li>
+                <li><strong>管理コストの増大</strong><br>在庫確認や修正作業に、目に見えない人件費（時間）がかかる。</li>
+            </ul>
+        </section>
+
+        <!-- ページ3: 解決策 (クラウド型) -->
+        <section class="slide slide-3">
+            <h2>解決策は「クラウド型」システム</h2>
+            <p>高価なシステムは不要。月額数千円から始められるSaaSが現代の主流です。</p>
+            <ul>
+                <li><strong>低コスト</strong><br>高額な初期投資やサーバー管理が不要。</li>
+                <li><strong>スマホ ＋ PC連携</strong><br>現場ではスマホで手軽に入力・スキャン。事務所ではPCで集計・分析。</li>
+                <li><strong>リアルタイム共有</strong><br>スタッフ全員が、いつでもどこでも最新の在庫数を確認できる。</li>
+            </ul>
+        </section>
+
+        <!-- ページ4: 必要な機能 -->
+        <section class="slide slide-4">
+            <h2>多機能は不要！必要な機能は3つだけ</h2>
+            <p>重要なのは「現場の誰もが毎日無理なく使える」シンプルさです。</p>
+            <ul>
+                <li><strong>1. バーコード管理</strong><br>スマホカメラで入出庫作業を「速く」「正確に」。</li>
+                <li><strong>2. リアルタイム在庫共有</strong><br>ECサイトと実店舗の在庫ズレ（空売り）を防ぐ。</li>
+                <li><strong>3. 入出庫履歴</strong><br>「いつ、誰が、何を」作業したか自動で記録。</li>
+            </ul>
+        </section>
+
+        <!-- ページ5: 導入ステップ -->
+        <section class="slide slide-5">
+            <h2>失敗しない導入の3ステップ</h2>
+            <p>最初から完璧を目指さず、小さく始めることが成功の秘訣です。</p>
+            <ul>
+                <li>Step 1：課題の明確化<br>「何を解決したいか」最低限の要求を書き出す。</li>
+                <li>Step 2：無料トライアル<br>機能一覧より「操作感」がストレスなく使えるか試す。</li>
+                <li>Step 3：スモールスタート<br>まずは売れ筋商品だけに絞って運用を開始し、定着させる。</li>
+            </ul>
+        </section>
+
+        <!-- ページ6: まとめ -->
+        <section class="slide slide-6">
+            <h2>在庫管理は「作業」ではなく「戦略」</h2>
+            <p>在庫は会社の資産です。資産を最適化し、キャッシュフローを改善する「戦略」として、低コストなクラウドシステムという「武器」を活用しましょう。</p>
+            <p class="highlight">
+                その小さな一歩が、ビジネスを次のステージへ進めます。
+            </p>
+        </section>
+        
+    </main>
+    
+    <!-- ナビゲーションボタン -->
+    <button class="nav-btn" id="prev-btn" title="前へ">&lt;</button>
+    <button class="nav-btn" id="next-btn" title="次へ">&gt;</button>
+
+    <script>
+        // ボタン操作のためのJavaScript
+        const container = document.getElementById('slides-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCount = document.querySelectorAll('.slide').length;
+
+        // ボタンの表示・非表示を更新する関数
+        function updateNavButtons() {
+            const scrollLeft = container.scrollLeft;
+            const slideWidth = container.clientWidth; // 1スライドの幅 (vw)
+            
+            // 現在のスライドインデックスを計算 (四捨五入でスナップに合わせる)
+            const currentSlideIndex = Math.round(scrollLeft / slideWidth);
+
+            // 最初のスライドなら「前へ」を隠す
+            prevBtn.style.display = (currentSlideIndex === 0) ? 'none' : 'block';
+            
+            // 最後のスライドなら「次へ」を隠す
+            nextBtn.style.display = (currentSlideIndex >= slideCount - 1) ? 'none' : 'block';
+        }
+
+        // 「前へ」ボタンがクリックされた時
+        prevBtn.addEventListener('click', () => {
+            container.scrollBy({
+                left: -container.clientWidth, // 1スライド分(vw)左へ
+                behavior: 'smooth' // スムーズにスクロール
+            });
+        });
+
+        // 「次へ」ボタンがクリックされた時
+        nextBtn.addEventListener('click', () => {
+            container.scrollBy({
+                left: container.clientWidth, // 1スライド分(vw)右へ
+                behavior: 'smooth'
+            });
+        });
+
+        // スクロールが終わるたびにボタンの状態を更新
+        // 'scroll'イベントは発火しすぎるため、'scrollend' (対応ブラウザ) や
+        // 'clearTimeout' を使ったデバウンス処理が望ましい
+        let scrollTimer;
+        container.addEventListener('scroll', () => {
+            clearTimeout(scrollTimer);
+            // 150ms スクロールが止まったら実行
+            scrollTimer = setTimeout(updateNavButtons, 150); 
+        });
+
+        // ページ読み込み時とウィンドウサイズ変更時にもチェック
+        window.addEventListener('load', updateNavButtons);
+        window.addEventListener('resize', updateNavButtons);
+    </script>
+</body>
+</html>
